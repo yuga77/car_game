@@ -1,0 +1,77 @@
+#centered {
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 50px;
+}
+
+h1,h2 {
+  color: red;
+  text-align: center;
+}
+
+#road_1 {
+  height: 480px;
+  width: 320px;
+  position: absolute;
+  top: -480px;
+  left: 200px;
+}
+
+#road_2 {
+  height: 480px;
+  width: 320px;
+  position: absolute;
+  top: 0px;
+  left: 200px;
+}
+
+#coming_car_1{
+  height: 40px;
+  width: 50px;
+  position: absolute;
+  top: 20px;
+  left: 140px;
+  z-index: 1;
+  visibility: hidden;
+}
+
+#coming_car_2{
+  height: 40px;
+  width: 50px;
+  position: absolute;
+  top: 20px;
+  left: 140px;
+  z-index: 1;
+  visibility: hidden;
+}
+
+#coming_car_3{
+  height: 40px;
+  width: 50px;
+  position: absolute;
+  top: 20px;
+  left: 140px;
+  z-index: 1;
+  visibility: hidden;
+}
+
+
+
+#my_car_1{
+  height: 40px;
+  width: 50px;
+  position: absolute;
+  top: 420px;
+  left: 220px;
+  z-index: 1;
+}
+
+#fire_1{
+  height: 32px;
+  width: 32px;
+  position: absolute;
+  top: 450px;
+  left: 160px;
+  z-index: 1;
+  visibility: hidden;
+}

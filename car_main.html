@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="car.css">
+  <script>
+    function on_load() {
+      window.name="Parent_Window";
+    }
+    function on_click(){  
+      open('car_start.html','game_start_window_1', 'width=720, height=480, status=1, menubar=1, toolbar=1, location=1, directories=1, resizable=0');
+    }
+  </script>
+</head>
+<body style="background-color: #ffffff;" onload="on_load();">
+  <div id="centered">
+    <h1>「ゲーム開始」ボタンをクリックしてクリックしてスタート！</h1>
+    <h2>ようこそ、Car_Gameへ！</h2>
+    <p>
+      <input type="button" value="ゲーム開始" onclick="on_click();">
+    </p>
+  </div>
+</body>
+</html>

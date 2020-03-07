@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="car.css">
+  <script>
+    set_my_car_y = 420;
+    my_car_x = 220;
+
+    function  Start_get_key() {
+      document.onkeydown = get_key;
+    }
+
+    function get_key(ev) {
+      if(ev) {
+        var get_key_code = ev.keyCode;
+      }else{
+        var get_key_code =event.keyCode;
+      }
+
+      if (get_key_code == 37) {
+        if (my_car_x <= 200) {
+          my_car_x = 200;
+        }else{
+          my_car_x -= 30;
+        }
+      }
+
+      if (get_key_code == 39) {
+        if (my_car_x >= 470) {
+          my_car_x = 470;
+        }else{
+          my_car_x += 30;
+        }
+      }
+
+      document.getElementById("my_car_1").style.left = my_car_x + "px";
+
+      if (get_key_code == 38) {
+        Move_Coming_Car();
+        Start_Road_Move();
+      }
+    }
+
+    road_1_height = 0;
+    road_2_height = 0;
+
+    function Start_Road_Move() {
+      road_1_height = document.getElementById("road_1").height;
+      road_2_height = document.getElementById("road_2").height;
+
+      Road_Move();
+    }
+
+    road_move_step = 10;
+    road_timer_interval = 20;
+    road_1_y = -road_1_height;
+    road_2_y = -0;
+
+    function Road_Move() {
+      road_1_y += road_move_step;
+      road_2_y += road_move_step;
+
+      document.getElementById("road_1").style.top = road_1_y + "px";
+      document.getElementById("road_2").style.top = road_2_y + "px";
+
+      if (road_1_y >= 0) {
+        road_1_y = -road_1_height;
+        road_2_y = 0;
+      }
+      road_timer = setTimeout("Road_Move()", road_timer_interval);
+    }
+
+    coming_car = new Array ();
+    coming_car_no = 3;
+
+    coming_car_1_y = -40;
+    coming_car_1_x = 140;
+
+    coming_car_2_y = 20;
+    coming_car_2_x = 140;
+
+    coming_car_3_y = 80;
+    coming_car_3_x = 140;
+    dy = 20;
+
+    set_road_height = 480;
+    start_Flag = true;
+
+    function Move_Coming_Car() {
+      if (start_Flag == true ) {
+        for (var i = 1; i < 4; i++) {
+          document.images[ "coming_car_" + i ].style.visibility = "visible";
+          coming_car_1_x = 200 + Math.floor (Math.random() * 280);
+          coming_car_2_x = 200 + Math.floor (Math.random() * 280);
+          coming_car_3_x = 200 + Math.floor (Math.random() * 280);
+
+        }
+        start_Flag = false;
+      }
+
+      document.getElementById("coming_car_1").style.left = coming_car_1_x + "px";
+      document.getElementById("coming_car_2").style.left = coming_car_2_x + "px";
+      document.getElementById("coming_car_3").style.left = coming_car_3_x + "px";
+
+      coming_car_1_y += dy;
+      coming_car_2_y += dy;
+      coming_car_3_y += dy;
+
+      if (coming_car_1_y > set_road_height) {
+        coming_car_1_y = -40;
+        coming_car_1_x = 200 + Math.floor (Math.random() * 280);
+      }
+
+      if (coming_car_2_y > set_road_height) {
+        coming_car_2_y = 20;
+        coming_car_2_x = 200 + Math.floor (Math.random() * 280);
+      }
+
+      if (coming_car_3_y > set_road_height) {
+        coming_car_3_y = -40;
+        coming_car_3_x = 200 + Math.floor (Math.random() * 280);
+      }
+
+      document.getElementById("coming_car_1").style.top = coming_car_1_y + "px";
+      document.getElementById("coming_car_1").style.left = coming_car_1_x + "px";
+      document.getElementById("coming_car_2").style.top = coming_car_2_y + "px";
+      document.getElementById("coming_car_2").style.left = coming_car_2_x + "px";
+      document.getElementById("coming_car_3").style.top = coming_car_3_y + "px";
+      document.getElementById("coming_car_3").style.left = coming_car_3_x + "px";
+
+      Hit_Car_Check();
+
+      var coming_car_timer = setTimeout("Move_Coming_Car();", 70);
+    }
+
+    fire_x = 0;
+    fire_y = 0;
+
+    function Hit_Car_Check() {
+      if ( (my_car_x -16 < coming_car_1_x + 50 && coming_car_1_x < my_car_x +16) && (set_my_car_y < coming_car_1_y + 40) ) {
+        fire_x = coming_car_1_x;
+        fire_y = coming_car_1_y;
+
+        Call_Fire();
+      }
+
+      if ( (my_car_x -16 < coming_car_2_x + 50 && coming_car_2_x < my_car_x +16) && (set_my_car_y < coming_car_2_y + 40) ) {
+        fire_x = coming_car_2_x;
+        fire_y = coming_car_2_y;
+
+        Call_Fire();
+      }
+
+      if ( (my_car_x -16 < coming_car_3_x + 50 && coming_car_3_x < my_car_x +16) && (set_my_car_y < coming_car_3_y + 40) ) {
+        fire_x = coming_car_3_x;
+        fire_y = coming_car_3_y;
+
+        Call_Fire();
+      }
+    }
+
+    function Call_Fire() {
+      document.getElementById("fire_1").style.top = fire_y + "px";
+      document.getElementById("fire_1").style.left = fire_x + "px";
+      document.images["fire_1"].style.visibility = "visible"
+
+      setTimeout(function() {
+        document.images["fire_1"].style.visibility= "hidden";
+
+        document.images["coming_car_1"].style.visibility = "hidden";
+      }, 500);
+
+      road_timer = road_timer_interval;
+      clearTimeout(coming_car_timer);
+    }
+
+  </script>
+</head>
+<body onload="Start_get_key();" oncontextmenu="Start_Road_Move(); return false;" onclick="Move_Coming_Car" style="background-color: #ffffff;">
+  <img id="road_1" src="Road_1.png">
+  <img id="road_2" src="Road_1.png" style="position: absolute; top: 0px; left: 200px;">
+  <img src="Car2.png" id="coming_car_1" name="coming_car_1"/>
+  <img src="Car2.png" id="coming_car_2" name="coming_car_2"/>
+  <img src="Car2.png" id="coming_car_3" name="coming_car_3"/>
+  <img src="Car1.png" id="my_car_1"/>
+  <img src="fire2.gif" id="fire_1" name="fire_1"/>
+</body>
+</html>
